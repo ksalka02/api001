@@ -8,7 +8,7 @@ api = Api(app)
 
 # created classes for both endpoints in the api (players and moreinfo)
 
-players_path = '/Users/ksalka/Desktop/api001/players.csv'
+players_path = 'players.csv'
 
 
 class players(Resource):
@@ -61,7 +61,7 @@ class players(Resource):
             }, 404
 
 
-moreinfo_path = '/Users/ksalka/Desktop/api001/moreinfo.csv'
+moreinfo_path = 'moreinfo.csv'
 
 
 class moreinfo(Resource):
@@ -121,4 +121,4 @@ api.add_resource(players, '/players')
 api.add_resource(moreinfo, '/moreinfo')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
