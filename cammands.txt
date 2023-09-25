@@ -1,0 +1,20 @@
+create ec2 instance and add security inboud rule "custom tcp" with port "5000" and "anywhere ipv4" access
+
+ssh -i ().pem ec2-user@()
+
+chmod 0400 ().pem
+
+we're in now:
+
+sudo yum update
+sudo yum install git
+sudo yum install python3-pip
+
+git clone https://github.com/ksalka02/api001.git
+
+cd api001
+
+pip install -r requirements.txt
+
+python3 main.py
+
