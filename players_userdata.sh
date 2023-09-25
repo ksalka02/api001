@@ -24,6 +24,8 @@ echo "###################################  install pip  ########################
 yum -y install python3-pip
 echo "###################################  clone repo  #############################"
 git clone https://github.com/ksalka02/api001.git
+echo "###################################  UPDATE repo  #############################"
+git pull
 
 cd api001
 echo "###################################  install requirements  #############################"
