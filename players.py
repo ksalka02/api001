@@ -117,7 +117,7 @@ class players(Resource):
 #             }, 404
 
 
-api.add_resource(players, '/players')
+# api.add_resource(players, '/players')
 # api.add_resource(moreinfo, '/moreinfo')
 
 if __name__ == "__main__":
