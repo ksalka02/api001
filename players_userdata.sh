@@ -30,5 +30,5 @@ git pull
 cd api001
 echo "###################################  install requirements  #############################"
 pip install -r requirements.txt
-echo "###################################  run main.py  #############################"
+echo "###################################  run players.py  #############################"
 python3 players.py

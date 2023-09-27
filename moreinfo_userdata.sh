@@ -31,5 +31,5 @@ git pull
 cd api001
 echo "###################################  install requirements  #############################"
 pip install -r requirements.txt
-echo "###################################  run main.py  #############################"
+echo "###################################  run moreinfo.py  #############################"
 python3 moreinfo.py

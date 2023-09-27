@@ -54,38 +54,68 @@ resource "aws_security_group" "players_api" {
 
 ########  EC2 INSTANCE ######
 
-resource "aws_instance" "players_api_instance" {
-  ami                    = "ami-03a6eaae9938c858c"
+# resource "aws_instance" "players_api_instance" {
+#   ami                    = "ami-03a6eaae9938c858c"
+#   instance_type          = "t2.micro"
+#   vpc_security_group_ids = [aws_security_group.players_api.id]
+#   key_name               = "api_test_key"
+#   user_data              = file("players_userdata.sh")
+#   tags = {
+#     Name = "players"
+#   }
+# }
+
+# resource "aws_instance" "moreinfo_api_instance" {
+#   ami                    = "ami-03a6eaae9938c858c"
+#   instance_type          = "t2.micro"
+#   vpc_security_group_ids = [aws_security_group.players_api.id]
+#   key_name               = "api_test_key"
+#   user_data              = file("moreinfo_userdata.sh")
+#   tags = {
+#     Name = "moreinfo"
+#   }
+# }
+
+
+###################### ASG #######################
+resource "aws_launch_template" "players_instance" {
+
   instance_type          = "t2.micro"
+  image_id             = "ami-03a6eaae9938c858c"
   vpc_security_group_ids = [aws_security_group.players_api.id]
   key_name               = "api_test_key"
-  user_data              = file("../players_userdata.sh")
-  tags = {
-    Name = "players"
-  }
+  user_data              = filebase64("players_userdata.sh")
 }
 
-resource "aws_instance" "moreinfo_api_instance" {
-  ami                    = "ami-03a6eaae9938c858c"
-  instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.players_api.id]
-  key_name               = "api_test_key"
-  user_data              = file("../moreinfo_userdata.sh")
-  tags = {
-    Name = "moreinfo"
+resource "aws_autoscaling_group" "asg_api" {
+
+  name                      = "asg_for_api"
+  availability_zones        = ["us-east-1a", "us-east-1b"]
+  max_size                  = 1
+  min_size                  = 1
+  desired_capacity          = 1
+  health_check_grace_period = 300
+
+  launch_template {
+    id      = aws_launch_template.players_instance.id
   }
+  # depends_on = [module.aws_lb]
 }
 
-###################### LOAD BALANCER #######################
+# resource "aws_autoscaling_attachment" "lb_asg" {
+#   autoscaling_group_name = aws_autoscaling_group.asg_api.id
+#   elb                    = aws_lb_target_group.lb.id
+# }
 
-# resource "aws_lb_target_group" "api-lb" {
+# ###################### LOAD BALANCER #######################
+
+# resource "aws_lb_target_group" "lb" {
 #   name     = "api-lb"
 #   port     = 5000
 #   protocol = "TCP"
 #   #how to show vpc
 #   slow_start = 0
 
-#   # load_balancing_algorithm_type = "round_robin"
 # }
 
 
@@ -107,12 +137,12 @@ resource "aws_instance" "moreinfo_api_instance" {
 # }
 
 
-output "get_player_api" {
-  description = "players address"
-  value       = "${aws_instance.players_api_instance.public_dns}:5000/players"
-}
+# output "get_player_api" {
+#   description = "players address"
+#   value       = "${aws_instance.players_api_instance.public_dns}:5000/players"
+# }
 
-output "get_moreinfo_api" {
-  description = "moreinfo address"
-  value       = "${aws_instance.moreinfo_api_instance.public_dns}:5000/moreinfo"
-}
+# output "get_moreinfo_api" {
+#   description = "moreinfo address"
+#   value       = "${aws_instance.moreinfo_api_instance.public_dns}:5000/moreinfo"
+# }
