@@ -4,7 +4,8 @@ resource "aws_launch_template" "players_instance5" {
   image_id               = "ami-03a6eaae9938c858c"
   vpc_security_group_ids = [aws_security_group.players_api.id]
   key_name               = "api_test_key"
-  user_data              = filebase64(templatefile("../players_userdata.sh", { "env" = 5000 }))
+  # user_data              = filebase64(templatefile("../players_userdata.sh", { "env" = 5000 }))
+  user_data              = templatefile("../players_userdata.sh", { "env" = 5000 })
 }
 
 resource "aws_autoscaling_group" "asg_api5" {
@@ -33,7 +34,8 @@ resource "aws_launch_template" "players_instance3" {
   image_id               = "ami-03a6eaae9938c858c"
   vpc_security_group_ids = [aws_security_group.players_api.id]
   key_name               = "api_test_key"
-  user_data              = filebase64(templatefile("../players_userdata.sh", { "env" = 3000 }))
+  # user_data              = filebase64(templatefile("../players_userdata.sh", { "env" = 3000 }))
+  user_data              = templatefile("../players_userdata.sh", { "env" = 3000 })
 }
 resource "aws_autoscaling_group" "asg_api3" {
 
