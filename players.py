@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Resource, Api, reqparse
 import pandas as pd
 import ast
+import os
 
 app = Flask(__name__)
 api = Api(app)
@@ -121,4 +122,7 @@ api.add_resource(players, '/players')
 # api.add_resource(moreinfo, '/moreinfo')
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    if os.environ["ENV"] == 5000:
+        app.run(host='0.0.0.0', debug=True, port=5000)
+    elif os.environ["ENV"] == 3000:
+        app.run(host='0.0.0.0', debug=True, port=3000)

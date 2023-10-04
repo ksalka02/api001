@@ -31,4 +31,5 @@ cd api001
 echo "###################################  install requirements  #############################"
 pip install -r requirements.txt
 echo "###################################  run players.py  #############################"
+export ENV="${env}"
 python3 players.py
