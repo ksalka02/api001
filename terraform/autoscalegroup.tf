@@ -1,16 +1,21 @@
+locals {
+  user_data5 = templatefile("../players_userdata.sh", { "env" = 5000 })
+  user_data3 = templatefile("../players_userdata.sh", { "env" = 3000 })
+}
 resource "aws_launch_template" "players_instance5" {
 
   instance_type          = "t2.micro"
   image_id               = "ami-03a6eaae9938c858c"
-  vpc_security_group_ids = [aws_security_group.players_api.id]
+  vpc_security_group_ids = [aws_security_group.players_api5.id]
   key_name               = "api_test_key"
   # user_data              = filebase64(templatefile("../players_userdata.sh", { "env" = 5000 }))
-  user_data              = templatefile("../players_userdata.sh", { "env" = 5000 })
+  # user_data              = templatefile("../players_userdata.sh", { "env" = 5000 })
+  user_data              = base64encode("${local.user_data5}")
 }
 
 resource "aws_autoscaling_group" "asg_api5" {
 
-  name                      = "asg_for_api"
+  name                      = "asg_for_api_5"
   availability_zones        = ["us-east-1c", "us-east-1d"]
   max_size                  = 1
   min_size                  = 1
@@ -32,14 +37,15 @@ resource "aws_launch_template" "players_instance3" {
 
   instance_type          = "t2.micro"
   image_id               = "ami-03a6eaae9938c858c"
-  vpc_security_group_ids = [aws_security_group.players_api.id]
+  vpc_security_group_ids = [aws_security_group.players_api3.id]
   key_name               = "api_test_key"
   # user_data              = filebase64(templatefile("../players_userdata.sh", { "env" = 3000 }))
-  user_data              = templatefile("../players_userdata.sh", { "env" = 3000 })
+  # user_data              = templatefile("../players_userdata.sh", { "env" = 3000 })
+  user_data              = base64encode("${local.user_data3}")
 }
 resource "aws_autoscaling_group" "asg_api3" {
 
-  name                      = "asg_for_api"
+  name                      = "asg_for_api_3"
   availability_zones        = ["us-east-1c", "us-east-1d"]
   max_size                  = 1
   min_size                  = 1

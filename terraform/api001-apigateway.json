@@ -44,7 +44,48 @@
           "type" : "http_proxy",
           "connectionId" : "${vpc_link}",
           "httpMethod" : "GET",
-          "uri" : "${lb_dns}",
+          "uri" : "http://$${stageVariables.VPC_LINK_URI_pl}",
+          "responses" : {
+            "default" : {
+              "statusCode" : "200"
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "connectionType" : "VPC_LINK"
+        }
+      }
+    },
+    "/moreinfo" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "x-api-key",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "Validate body, query string parameters, and headers",
+        "x-amazon-apigateway-integration" : {
+          "type" : "http_proxy",
+          "connectionId" : "${vpc_link}",
+          "httpMethod" : "GET",
+          "uri" : "http://$${stageVariables.VPC_LINK_URI_mi}",
           "responses" : {
             "default" : {
               "statusCode" : "200"
