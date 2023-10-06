@@ -25,7 +25,7 @@ resource "aws_api_gateway_usage_plan_key" "main" {
 
 # API ################################################################################################
 resource "aws_api_gateway_rest_api" "players_api" {
-  body = templatefile("api001-apigateway.json",
+  body = templatefile("players_api_2.json",
     {
       "vpc_link" = aws_api_gateway_vpc_link.vpc_link.id
       # "lb_dns"   = "http://${aws_lb.api_lb.dns_name}:5000/players"
