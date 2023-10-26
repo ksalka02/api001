@@ -43,6 +43,32 @@ class players(Resource):
             new_df.to_csv(players_path, index=False)
             return {'data': new_df.to_dict()}, 200
 
+    def put(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('playerNumber', required=True,
+                            type=int, location='args')
+        parser.add_argument('name', required=True,
+                            type=str, location='args')
+        parser.add_argument('rating', required=True,
+                            type=int, location='args')
+        args = parser.parse_args()
+
+        data = pd.read_csv(players_path)
+        # need to check if the name exists first then update it
+        if args['name'] in data['name'].tolist():
+            data = data[data['name'] != str(args['name'])]
+            # data.to_csv(players_path, index=False)
+            temp_df = pd.DataFrame([[args['playerNumber'], args['name'], args['rating']]], columns=[
+                                   'playerNumber', 'name',  'rating'])
+            new_df = pd.concat([data, temp_df], ignore_index=True)
+
+            new_df.to_csv(players_path, index=False)
+            return {'data': new_df.to_dict()}, 200
+        else:
+            return {
+                'message': f"{args['name']} doesn't exists"
+            }, 409
+
     def delete(self):
         parser = reqparse.RequestParser()
         parser.add_argument('name', required=True,
@@ -121,11 +147,12 @@ class moreinfo(Resource):
 api.add_resource(players, '/players')
 api.add_resource(moreinfo, '/moreinfo')
 
-port = os.environ["ENV"]
+# port = os.environ["ENV"]¸
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True, port=port)
+    # app.run(host='0.0.0.0', debug=True, port=port)
+    app.run(host='0.0.0.0', debug=True, port=5000)
 
 
 # if __name__ == "__main__":
