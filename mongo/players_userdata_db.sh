@@ -27,8 +27,8 @@ git clone https://github.com/ksalka02/api001.git
 echo "###################################  UPDATE repo  #############################"
 git pull
 
-cd api001
-cd mongo
+cd api001/mongo
+
 echo "###################################  install requirements  #############################"
 pip install -r requirements.txt
 echo "###################################  run playersdb.py  #############################"
