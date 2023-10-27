@@ -1,8 +1,5 @@
-# from dotenv import load_dotenv, find_dotenv
 import os
-# import pprint
 from pymongo import MongoClient
-# load_dotenv(find_dotenv())
 import boto3
 
 # password = os.environ.get("MONGODB_PWD")
@@ -14,6 +11,7 @@ password = client.get_parameter(
     Name='/api/mongo/password',
     WithDecryption=True
 )
+
 pwd = password["Parameter"]["Value"]
 
 connection_string = f"mongodb+srv://ksalka:{pwd}@cluster0.wby46ms.mongodb.net/?retryWrites=true&w=majority"

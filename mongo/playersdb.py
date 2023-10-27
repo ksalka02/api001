@@ -1,14 +1,12 @@
 from flask import Flask, json, jsonify
 from flask_restful import Resource, Api, reqparse
-# import pandas as pd
 import maindb
-# import os
+# import maindbhost
 import pymongo
 from bson import json_util
-# import database
-
 
 connectionString = maindb.connection_string
+# connectionString = maindbhost.connection_string
 client = pymongo.MongoClient(connectionString)
 
 
@@ -62,19 +60,30 @@ class players(Resource):
                             type=int, location='args')
         parser.add_argument('rating', required=True,
                             type=int, location='args')
+        parser.add_argument('newname', required=False,
+                            type=str, location='args')
         args = parser.parse_args()
 
         player_record = col.find_one({"playername": args['playername']})
         json_object = json.loads(json_util.dumps(player_record))
 
         # need to check if the name exists first then update it
-        if json_object:
+        if json_object and args['newname']:
+            updates = {
+                "$set": {"playername": args['newname'], "rating": args['rating'], "number": args['number']}
+            }
+            x = col.update_one({"playername": args['playername']}, updates)
+            x = col.find()
+            return {'data': json.loads(json_util.dumps(x))}, 200
+
+        elif json_object:
             updates = {
                 "$set": {"rating": args['rating'], "number": args['number']}
             }
             x = col.update_one({"playername": args['playername']}, updates)
             x = col.find()
             return {'data': json.loads(json_util.dumps(x))}, 200
+
         else:
             return {
                 'message': f"{args['playername']} doesn't exists"
