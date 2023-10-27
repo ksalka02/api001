@@ -2,5 +2,4 @@ flask
 flask-restful
 bson
 pymongo
-os
 dotenv
