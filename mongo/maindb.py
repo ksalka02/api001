@@ -6,7 +6,7 @@ from pymongo import MongoClient
 import boto3
 
 # password = os.environ.get("MONGODB_PWD")
-client = boto3.client('ssm')
+client = boto3.client('ssm', region_name='us-east-1')
 
 password = client.get_parameter(
     Name='/api/mongo/password',
