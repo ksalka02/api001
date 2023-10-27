@@ -28,8 +28,8 @@ echo "###################################  UPDATE repo  ########################
 git pull
 
 cd api001
+cd mongo
 echo "###################################  install requirements  #############################"
 pip install -r requirements.txt
-echo "###################################  run players.py  #############################"
-export ENV="${env}"
-python3 players.py
+echo "###################################  run playersdb.py  #############################"
+python3 playersdb.py
