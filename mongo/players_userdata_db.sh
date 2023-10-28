@@ -32,4 +32,5 @@ cd api001/mongo
 echo "###################################  install requirements  #############################"
 pip install -r requirements.txt
 echo "###################################  run playersdb.py  #############################"
+export ENV="${env}"
 python3 playersdb.py

@@ -1,6 +1,6 @@
 locals {
-  user_data5 = templatefile("../players_userdata.sh", { "env" = 5000 })
-  user_data3 = templatefile("../players_userdata.sh", { "env" = 3000 })
+  user_data5 = templatefile("../mongo/players_userdata_db.sh", { "env" = 5000 })
+  user_data3 = templatefile("../mongo/players_userdata_db.sh", { "env" = 3000 })
 }
 resource "aws_launch_template" "players_instance5" {
 
@@ -10,7 +10,7 @@ resource "aws_launch_template" "players_instance5" {
   key_name               = "api_test_key"
   # user_data              = filebase64(templatefile("../players_userdata.sh", { "env" = 5000 }))
   # user_data              = templatefile("../players_userdata.sh", { "env" = 5000 })
-  user_data              = base64encode("${local.user_data5}")
+  user_data = base64encode("${local.user_data5}")
 }
 
 resource "aws_autoscaling_group" "asg_api5" {
@@ -41,7 +41,7 @@ resource "aws_launch_template" "players_instance3" {
   key_name               = "api_test_key"
   # user_data              = filebase64(templatefile("../players_userdata.sh", { "env" = 3000 }))
   # user_data              = templatefile("../players_userdata.sh", { "env" = 3000 })
-  user_data              = base64encode("${local.user_data3}")
+  user_data = base64encode("${local.user_data3}")
 }
 resource "aws_autoscaling_group" "asg_api3" {
 
