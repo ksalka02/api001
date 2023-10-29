@@ -57,9 +57,9 @@ class players(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('playername', required=True,
                             type=str, location='args')
-        parser.add_argument('number', required=True,
+        parser.add_argument('number', required=False,
                             type=int, location='args')
-        parser.add_argument('rating', required=True,
+        parser.add_argument('rating', required=False,
                             type=int, location='args')
         parser.add_argument('newname', required=False,
                             type=str, location='args')
@@ -154,13 +154,13 @@ class moreinfo(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('playerId', required=True,
                             type=str, location='args')
-        parser.add_argument('skillmoves', required=True,
+        parser.add_argument('skillmoves', required=False,
                             type=int, location='args')
-        parser.add_argument('weakfoot', required=True,
+        parser.add_argument('weakfoot', required=False,
                             type=int, location='args')
-        parser.add_argument('workrates', required=True,
+        parser.add_argument('workrates', required=False,
                             type=str, location='args')
-        parser.add_argument('links', required=True,
+        parser.add_argument('links', required=False,
                             type=str, location='args')
         parser.add_argument('newplayerId', required=False,
                             type=str, location='args')
