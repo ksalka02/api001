@@ -69,19 +69,18 @@ class players(Resource):
         json_object = json.loads(json_util.dumps(player_record))
 
         # need to check if the name exists first then update it
-        if json_object and args['newname']:
-            updates = {
-                "$set": {"playername": args['newname'], "rating": args['rating'], "number": args['number']}
-            }
-            x = col.update_one({"playername": args['playername']}, updates)
-            x = col.find()
-            return {'data': json.loads(json_util.dumps(x))}, 200
-
-        elif json_object:
-            updates = {
-                "$set": {"rating": args['rating'], "number": args['number']}
-            }
-            x = col.update_one({"playername": args['playername']}, updates)
+        updates = {}
+        if json_object:
+            if args['newname']:
+                updates["playername"] = args['newname']
+            if args['rating']:
+                updates["rating"] = args['rating']
+            if args['number']:
+                updates["number"] = args['number']
+            x = col.update_one(
+                {"playername": args['playername']}, {
+                    "$set": updates
+                })
             x = col.find()
             return {'data': json.loads(json_util.dumps(x))}, 200
 
@@ -124,7 +123,7 @@ class moreinfo(Resource):
 
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('playerId', required=True,
+        parser.add_argument('playerid', required=True,
                             type=str, location='args')
         parser.add_argument('skillmoves', required=True,
                             type=int, location='args')
@@ -136,15 +135,15 @@ class moreinfo(Resource):
                             type=str, location='args')
         args = parser.parse_args()
 
-        player_record = col2.find_one({"playerId": args['playerId']})
+        player_record = col2.find_one({"playerid": args['playerid']})
         json_object = json.loads(json_util.dumps(player_record))
 
         if json_object:
             return {
-                'message': f"{args['playerId']} already exists"
+                'message': f"{args['playerid']} already exists"
             }, 409
         else:
-            document = {"playerId": args['playerId'],
+            document = {"playerid": args['playerid'],
                         "skillmoves": args['skillmoves'], "weakfoot": args['weakfoot'], "workrates": args['workrates'], "links": args['links']}
             x = col2.insert_one(document)
             x = col2.find()
@@ -152,7 +151,7 @@ class moreinfo(Resource):
 
     def put(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('playerId', required=True,
+        parser.add_argument('playerid', required=True,
                             type=str, location='args')
         parser.add_argument('skillmoves', required=False,
                             type=int, location='args')
@@ -162,51 +161,54 @@ class moreinfo(Resource):
                             type=str, location='args')
         parser.add_argument('links', required=False,
                             type=str, location='args')
-        parser.add_argument('newplayerId', required=False,
+        parser.add_argument('newplayerid', required=False,
                             type=str, location='args')
         args = parser.parse_args()
 
-        player_record = col2.find_one({"playerId": args['playerId']})
+        player_record = col2.find_one({"playerid": args['playerid']})
         json_object = json.loads(json_util.dumps(player_record))
 
         # need to check if the name exists first then update it
-        if json_object and args['newplayerId']:
-            updates = {
-                "$set": {"playerId": args['newplayerId'], "skillmoves": args['skillmoves'], "weakfoot": args['weakfoot'], "workrates": args['workrates'], "links": args['links']}
-            }
-            x = col2.update_one({"playerId": args['playerId']}, updates)
-            x = col2.find()
-            return {'data': json.loads(json_util.dumps(x))}, 200
-
-        elif json_object:
-            updates = {
-                "$set": {"skillmoves": args['skillmoves'], "weakfoot": args['weakfoot'], "workrates": args['workrates'], "links": args['links']}
-            }
-            x = col2.update_one({"playerId": args['playerId']}, updates)
+        updates = {}
+        if json_object:
+            if args['newplayerid']:
+                updates["playerid"] = args['newplayerid']
+            if args['skillmoves']:
+                updates["skillmoves"] = args['skillmoves']
+            if args['weakfoot']:
+                updates["weakfoot"] = args['weakfoot']
+            if args['workrates']:
+                updates["workrates"] = args['workrates']
+            if args['links']:
+                updates["links"] = args['links']
+            x = col2.update_one(
+                {"playerid": args['playerid']}, {
+                    "$set": updates
+                })
             x = col2.find()
             return {'data': json.loads(json_util.dumps(x))}, 200
 
         else:
             return {
-                'message': f"{args['playerId']} doesn't exists"
+                'message': f"{args['playerid']} doesn't exists"
             }, 409
 
     def delete(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('playerId', required=True,
+        parser.add_argument('playerid', required=True,
                             type=str, location='args')
         args = parser.parse_args()
 
-        player_record = col2.find_one({"playerId": args['playerId']})
+        player_record = col2.find_one({"playerid": args['playerid']})
         json_object = json.loads(json_util.dumps(player_record))
 
         if json_object:
-            x = col2.delete_one({"playerId": args['playerId']})
+            x = col2.delete_one({"playerid": args['playerid']})
             x = col2.find()
             return {'data': json.loads(json_util.dumps(x))}, 200
         else:
             return {
-                'message': f"{args['playerId']} does not exist!"
+                'message': f"{args['playerid']} does not exist!"
             }, 404
 
 
