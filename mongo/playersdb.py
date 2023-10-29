@@ -110,7 +110,7 @@ class players(Resource):
 
 
 db = client["library"]
-col = db["moreinfo"]
+col2 = db["moreinfo"]
 # playerId,skillmoves,weakfoot,workrates,links
 
 
@@ -118,7 +118,7 @@ class moreinfo(Resource):
 
     def get(self):
 
-        x = col.find()
+        x = col2.find()
 
         return {'data': json.loads(json_util.dumps(x))}, 200
 
@@ -136,7 +136,7 @@ class moreinfo(Resource):
                             type=str, location='args')
         args = parser.parse_args()
 
-        player_record = col.find_one({"playerId": args['playerId']})
+        player_record = col2.find_one({"playerId": args['playerId']})
         json_object = json.loads(json_util.dumps(player_record))
 
         if json_object:
@@ -146,8 +146,8 @@ class moreinfo(Resource):
         else:
             document = {"playerId": args['playerId'],
                         "skillmoves": args['skillmoves'], "weakfoot": args['weakfoot'], "workrates": args['workrates'], "links": args['links']}
-            x = col.insert_one(document)
-            x = col.find()
+            x = col2.insert_one(document)
+            x = col2.find()
             return {'data': json.loads(json_util.dumps(x))}, 200
 
     def put(self):
@@ -166,7 +166,7 @@ class moreinfo(Resource):
                             type=str, location='args')
         args = parser.parse_args()
 
-        player_record = col.find_one({"playerId": args['playerId']})
+        player_record = col2.find_one({"playerId": args['playerId']})
         json_object = json.loads(json_util.dumps(player_record))
 
         # need to check if the name exists first then update it
@@ -174,16 +174,16 @@ class moreinfo(Resource):
             updates = {
                 "$set": {"playerId": args['newplayerId'], "skillmoves": args['skillmoves'], "weakfoot": args['weakfoot'], "workrates": args['workrates'], "links": args['links']}
             }
-            x = col.update_one({"playerId": args['playerId']}, updates)
-            x = col.find()
+            x = col2.update_one({"playerId": args['playerId']}, updates)
+            x = col2.find()
             return {'data': json.loads(json_util.dumps(x))}, 200
 
         elif json_object:
             updates = {
                 "$set": {"skillmoves": args['skillmoves'], "weakfoot": args['weakfoot'], "workrates": args['workrates'], "links": args['links']}
             }
-            x = col.update_one({"playerId": args['playerId']}, updates)
-            x = col.find()
+            x = col2.update_one({"playerId": args['playerId']}, updates)
+            x = col2.find()
             return {'data': json.loads(json_util.dumps(x))}, 200
 
         else:
@@ -197,12 +197,12 @@ class moreinfo(Resource):
                             type=str, location='args')
         args = parser.parse_args()
 
-        player_record = col.find_one({"playerId": args['playerId']})
+        player_record = col2.find_one({"playerId": args['playerId']})
         json_object = json.loads(json_util.dumps(player_record))
 
         if json_object:
-            x = col.delete_one({"playerId": args['playerId']})
-            x = col.find()
+            x = col2.delete_one({"playerId": args['playerId']})
+            x = col2.find()
             return {'data': json.loads(json_util.dumps(x))}, 200
         else:
             return {

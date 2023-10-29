@@ -13,7 +13,7 @@ password = client.get_parameter(
 )
 
 pwd = password["Parameter"]["Value"]
-
+print(pwd)
 connection_string = f"mongodb+srv://ksalka:{pwd}@cluster0.wby46ms.mongodb.net/?retryWrites=true&w=majority"
 
 

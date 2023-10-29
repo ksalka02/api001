@@ -2,16 +2,27 @@ locals {
   user_data5 = templatefile("../mongo/players_userdata_db.sh", { "env" = 5000 })
   user_data3 = templatefile("../mongo/players_userdata_db.sh", { "env" = 3000 })
 }
+
+resource "aws_iam_instance_profile" "test_profile" {
+  role = "playersapi"
+}
+
 resource "aws_launch_template" "players_instance5" {
 
   instance_type          = "t2.micro"
   image_id               = "ami-03a6eaae9938c858c"
   vpc_security_group_ids = [aws_security_group.players_api5.id]
   key_name               = "api_test_key"
+  iam_instance_profile {
+    # arn = "arn:aws:iam::939365853055:instance-profile/playersapi"
+    arn = aws_iam_instance_profile.test_profile.arn
+  }
+  # iam_instance_profile   = "arn:aws:iam::939365853055:role/playersapi"
   # user_data              = filebase64(templatefile("../players_userdata.sh", { "env" = 5000 }))
   # user_data              = templatefile("../players_userdata.sh", { "env" = 5000 })
   user_data = base64encode("${local.user_data5}")
 }
+
 
 resource "aws_autoscaling_group" "asg_api5" {
 
@@ -39,6 +50,10 @@ resource "aws_launch_template" "players_instance3" {
   image_id               = "ami-03a6eaae9938c858c"
   vpc_security_group_ids = [aws_security_group.players_api3.id]
   key_name               = "api_test_key"
+  iam_instance_profile {
+    # arn = "arn:aws:iam::939365853055:instance-profile/playersapi"
+    arn = aws_iam_instance_profile.test_profile.arn
+  }
   # user_data              = filebase64(templatefile("../players_userdata.sh", { "env" = 3000 }))
   # user_data              = templatefile("../players_userdata.sh", { "env" = 3000 })
   user_data = base64encode("${local.user_data3}")
