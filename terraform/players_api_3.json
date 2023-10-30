@@ -55,6 +55,14 @@
         }
       },
       "post" : {
+        "parameters" : [ {
+          "name" : "x-api-key",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "200 response",
@@ -86,6 +94,14 @@
         }
       },
       "put" : {
+        "parameters" : [ {
+          "name" : "x-api-key",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "200 response",
@@ -117,6 +133,14 @@
         }
       },
       "delete" : {
+        "parameters" : [ {
+          "name" : "x-api-key",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "200 response",
@@ -189,6 +213,14 @@
         }
       },
       "post" : {
+        "parameters" : [ {
+          "name" : "x-api-key",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "200 response",
@@ -220,6 +252,14 @@
         }
       },
       "put" : {
+        "parameters" : [ {
+          "name" : "x-api-key",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "200 response",
@@ -251,6 +291,14 @@
         }
       },
       "delete" : {
+        "parameters" : [ {
+          "name" : "x-api-key",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "200 response",
