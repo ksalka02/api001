@@ -36,4 +36,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.workflow }}
 
     - name: Run TFLint
-      run: tflint --recursive -f compact
+      run: tflint --recursive
