@@ -10,10 +10,6 @@ resource "aws_lb" "api_lb" {
 
 }
 
-locals {
-  tesadoiuvadv = 
-  skjdhfakjdhfa =
-}
 
 resource "aws_lb_target_group" "api_tg5" {
   name        = "api-tg5"
