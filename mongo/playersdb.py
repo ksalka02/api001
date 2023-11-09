@@ -1,4 +1,4 @@
-from flask import Flask, json, jsonify
+from flask import Flask, json
 from flask_restful import Resource, Api, reqparse
 import maindb
 import os
