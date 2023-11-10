@@ -80,9 +80,9 @@ resource "aws_security_group" "players_api3" {
 }
 
 
-data "http" "myip" {
-  url = "http://ipv4.icanhazip.com"
-}
+# data "http" "myip" {
+#   url = "http://ipv4.icanhazip.com"
+# }
 
 resource "aws_security_group" "lb_sg" {
   name        = "lb-sg"
