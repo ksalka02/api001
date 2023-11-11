@@ -144,7 +144,10 @@ class moreinfo(Resource):
             }, 409
         else:
             document = {"playerid": args['playerid'],
-                        "skillmoves": args['skillmoves'], "weakfoot": args['weakfoot'], "workrates": args['workrates'], "links": args['links']}
+                        "skillmoves": args['skillmoves'],
+                        "weakfoot": args['weakfoot'],
+                        "workrates": args['workrates'],
+                        "links": args['links']}
             x = col2.insert_one(document)
             x = col2.find()
             return {'data': json.loads(json_util.dumps(x))}, 200
