@@ -35,8 +35,11 @@ class players(Resource):
                 'message': f"{args['name']} already exists"
             }, 409
         else:
-            temp_df = pd.DataFrame([[args['playerNumber'], args['name'], args['rating']]], columns=[
-                                   'playerNumber', 'name',  'rating'])
+            temp_df = pd.DataFrame([[
+                args['playerNumber'],
+                args['name'],
+                args['rating']]],
+                columns=['playerNumber', 'name',  'rating'])
 
             new_df = pd.concat([data, temp_df], ignore_index=True)
 
@@ -58,8 +61,11 @@ class players(Resource):
         if args['name'] in data['name'].tolist():
             data = data[data['name'] != str(args['name'])]
             # data.to_csv(players_path, index=False)
-            temp_df = pd.DataFrame([[args['playerNumber'], args['name'], args['rating']]], columns=[
-                                   'playerNumber', 'name',  'rating'])
+            temp_df = pd.DataFrame([[args['playerNumber'],
+                                     args['name'],
+                                     args['rating']]],
+                                   columns=['playerNumber', 'name',  'rating'])
+
             new_df = pd.concat([data, temp_df], ignore_index=True)
 
             new_df.to_csv(players_path, index=False)
@@ -117,8 +123,12 @@ class moreinfo(Resource):
                 'message': f"{args['playerId']} already exists"
             }, 409
         else:
-            temp_df = pd.DataFrame([[args['playerId'], args['skillmoves'], args['weakfoot'], args['workrates'], args['links']]], columns=[
-                                   'playerId', 'skillmoves',  'weakfoot', 'workrates', 'links'])
+            temp_df = pd.DataFrame([[args['playerId'],
+                                     args['skillmoves'],
+                                     args['weakfoot'],
+                                     args['workrates'],
+                                     args['links']]],
+                                   columns=['playerId', 'skillmoves',  'weakfoot', 'workrates', 'links'])
 
             new_df = pd.concat([data, temp_df], ignore_index=True)
 

@@ -11,6 +11,6 @@ load_dotenv(dotenv_path)
 
 password = os.getenv("MONGODB_PWD")
 
-connection_string = f"mongodb+srv://ksalka:{password}@cluster0.wby46ms.mongodb.net/?retryWrites=true&w=majority"
+connection_string = f"mongodb+srv://ksalka:{password}@cluster0.wby46ms.mongodb.net/?retryWrites=true&w=majority"  # noqa: E501
 
 client = MongoClient(connection_string)

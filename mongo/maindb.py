@@ -14,7 +14,7 @@ password = client.get_parameter(
 
 pwd = password["Parameter"]["Value"]
 
-connection_string = f"mongodb+srv://ksalka:{pwd}@cluster0.wby46ms.mongodb.net/?retryWrites=true&w=majority"
+connection_string = f"mongodb+srv://ksalka:{pwd}@cluster0.wby46ms.mongodb.net/?retryWrites=true&w=majority"  # noqa: E501
 
 
 client = MongoClient(connection_string)
