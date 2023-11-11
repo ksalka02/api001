@@ -128,7 +128,7 @@ class moreinfo(Resource):
                                      args['weakfoot'],
                                      args['workrates'],
                                      args['links']]],
-                                   columns=['playerId', 'skillmoves',  'weakfoot', 'workrates', 'links'])
+                                   columns=['playerId', 'skillmoves',  'weakfoot', 'workrates', 'links'])  # noqa: E501
 
             new_df = pd.concat([data, temp_df], ignore_index=True)
 
