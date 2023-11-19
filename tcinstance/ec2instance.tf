@@ -1,12 +1,29 @@
+locals {
+  ebs_path = "/external/team_city"
+}
 resource "aws_instance" "teamcity" {
   ami                    = "ami-03a6eaae9938c858c"
   instance_type          = "t2.small"
   vpc_security_group_ids = [aws_security_group.tc_sg.id]
   key_name               = "api_test_key"
-  user_data              = file("tc_userdata.sh")
+  user_data = templatefile("tc_userdata.sh",
+    {
+      ebs_path = local.ebs_path
+  })
   tags = {
     Name = "TCtest"
   }
+}
+
+resource "aws_ebs_volume" "docker_tc" {
+  availability_zone = "us-east-1a"
+  type              = "gp3"
+  size              = 3
+}
+resource "aws_volume_attachment" "ebs_att" {
+  device_name = local.ebs_path
+  volume_id   = aws_ebs_volume.docker_tc.id
+  instance_id = aws_instance.teamcity.id
 }
 
 resource "aws_security_group" "tc_sg" {
