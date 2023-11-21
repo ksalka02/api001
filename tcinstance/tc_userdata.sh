@@ -23,7 +23,7 @@ yum -y install docker
 echo "###################################  start docker  #############################"
 systemctl start docker
 echo "###################################  run docker  #############################"
-docker run -v team_city_data:/data/teamcity_server/datadir -v team_city_logs:/opt/teamcity/logs -p 8111:8111 -d jetbrains/teamcity-server
-# docker run -v ${ebs_path}/data:/data/teamcity_server/datadir -v ${ebs_path}/logs:/opt/teamcity/logs -p 8111:8111 -d jetbrains/teamcity-server
+# docker run -v team_city_data:/data/teamcity_server/datadir -v team_city_logs:/opt/teamcity/logs -p 8111:8111 -d jetbrains/teamcity-server
+docker run -v ${ebs_path}:/data/teamcity_server/datadir -v ${ebs_path}:/opt/teamcity/logs -p 8111:8111 -d jetbrains/teamcity-server
 echo "###################################  test docker  #############################"
 docker ps
