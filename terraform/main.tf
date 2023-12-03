@@ -13,10 +13,10 @@ terraform {
   }
 }
 
-provider "aws" {
-  region = "us-east-1"
-  # profile = "main"
-}
+# provider "aws" {
+#   region = "us-east-1"
+#   # profile = "main"
+# }
 
 
 # resource "null_resource" "more_info" {
