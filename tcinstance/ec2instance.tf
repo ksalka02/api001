@@ -1,9 +1,10 @@
 locals {
   ebs_path = "/dev/sdf"
+
 }
 resource "aws_instance" "teamcity" {
   ami                    = "ami-03a6eaae9938c858c"
-  instance_type          = "t2.small"
+  instance_type          = "t2.medium"
   vpc_security_group_ids = [aws_security_group.tc_sg.id]
   availability_zone      = "us-east-1a"
   key_name               = "api_test_key"
@@ -14,12 +15,15 @@ resource "aws_instance" "teamcity" {
   tags = {
     Name = "TCtest"
   }
+  root_block_device {
+    volume_size = 25
+  }
 }
 
 resource "aws_ebs_volume" "docker_tc" {
   availability_zone = "us-east-1a"
   type              = "gp3"
-  size              = 8
+  size              = 16
 }
 resource "aws_volume_attachment" "ebs_att" {
   device_name = local.ebs_path
