@@ -50,7 +50,7 @@ echo "###################################  run docker  #########################
 # chown -R 1000:1000 /newvolume
 docker run -v /newvolume:/data/teamcity_server/datadir -v /newvolume:/opt/teamcity/logs -p 8111:8111 -d jetbrains/teamcity-server
 instance_ip=$(ec2-metadata --public-ipv4 | awk 'NR==1{print $2}')
-docker run -v /tcagent:/data/teamcity_agent/conf -e SERVER_URL="$${instance_ip}:8111" -d jetbrains/teamcity-agent
+docker run -u 0 -v /tcagent:/data/teamcity_agent/conf -v /var/run/docker.sock:/var/run/docker.sock -v /opt/buildagent/work:/opt/buildagent/work -v /opt/buildagent/temp:/opt/buildagent/temp -v /opt/buildagent/tools:/opt/buildagent/tools -v /opt/buildagent/plugins:/opt/buildagent/plugins -v /opt/buildagent/system:/opt/buildagent/system -e SERVER_URL="$${instance_ip}:8111" -d jetbrains/teamcity-agent
 # echo "###################################  test docker  #############################"
 # docker ps
 # echo "###################################  start sleep  #############################"
