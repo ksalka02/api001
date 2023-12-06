@@ -4,8 +4,8 @@ resource "aws_security_group" "players_api5" {
   # vpc_id      = aws_vpc.main.id
 
   ingress {
-    description     , "ssh"
-    from_port       . 22
+    description     = "ssh"
+    from_port       = 22
     to_port         = 22
     protocol        = "tcp"
     security_groups = [aws_security_group.lb_sg.id]
