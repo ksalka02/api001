@@ -5,7 +5,7 @@ resource "aws_security_group" "players_api5" {
 
   ingress {
     description     , "ssh"
-    from_port       = 22
+    from_port       . 22
     to_port         = 22
     protocol        = "tcp"
     security_groups = [aws_security_group.lb_sg.id]
