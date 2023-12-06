@@ -3,7 +3,7 @@ resource "aws_security_group" "players_api5" {
   description = "api ports"
   # vpc_id      = aws_vpc.main.id
 
-  ingressssssss {
+  ingressssssssssss {
     description     = "ssh"
     from_port       = 22
     to_port         = 22
