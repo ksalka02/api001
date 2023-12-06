@@ -1,0 +1,18 @@
+git status
+git add .
+git commit -am ""
+git push
+
+git pull
+
+git branch
+git checkout (branch name)
+
+// delete branch locally
+git branch -d localBranchName
+
+// delete branch remotely
+git push origin --delete remoteBranchName
+
+//remove all non-hidden files and sub-directories (along with all of their contents) in a directory
+rm -r /path/to/directory/*
