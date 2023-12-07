@@ -16,7 +16,7 @@ resource "aws_instance" "teamcity" {
     Name = "TCtest"
   }
   root_block_device {
-    volume_size = 25
+    volume_size = 16
   }
 }
 

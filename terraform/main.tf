@@ -5,6 +5,7 @@ terraform {
     bucket = "terraform-tc-state-ks"
     key    = "api001/terraform.tfstate"
     region = "us-east-1"
+    # profile = "main"
   }
 
   required_providers {
