@@ -6,7 +6,18 @@ git push
 git pull
 
 git branch
-git checkout (branch name)
+
+//create 
+git checkout -b [name_of_your_new_branch]
+
+
+
+//into another branch
+git checkout
+
+
+// pushing to new branch for 1st time
+git push -u origin (branch)
 
 // delete branch locally
 git branch -d localBranchName
