@@ -1,6 +1,9 @@
 create ec2 instance and add security inboud rule "custom tcp" with port "5000" and "anywhere ipv4" access
 
-ssh -i api_test_key.pem ec2-user@()
+cd desktop/api_projects/keys
+ssh -i api_test_key.pem ec2-user@
+
+
 
 chmod 0400 api_test_key.pem
 

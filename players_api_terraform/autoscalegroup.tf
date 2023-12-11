@@ -14,13 +14,14 @@ resource "aws_launch_template" "players_instance5" {
   vpc_security_group_ids = [aws_security_group.players_api5.id]
   key_name               = "api_test_key"
   iam_instance_profile {
-    # arn = "arn:aws:iam::939365853055:instance-profile/playersapi"
     arn = aws_iam_instance_profile.test_profile.arn
   }
-  # iam_instance_profile   = "arn:aws:iam::939365853055:role/playersapi"
-  # user_data              = filebase64(templatefile("../players_userdata.sh", { "env" = 5000 }))
-  # user_data              = templatefile("../players_userdata.sh", { "env" = 5000 })
   user_data = base64encode(local.user_data5)
+
+  # metadata_options {
+  #   http_put_response_hop_limit = 3
+  #   http_endpoint               = "enabled"
+  # }
 }
 
 
@@ -51,12 +52,14 @@ resource "aws_launch_template" "players_instance3" {
   vpc_security_group_ids = [aws_security_group.players_api3.id]
   key_name               = "api_test_key"
   iam_instance_profile {
-    # arn = "arn:aws:iam::939365853055:instance-profile/playersapi"
     arn = aws_iam_instance_profile.test_profile.arn
   }
-  # user_data              = filebase64(templatefile("../players_userdata.sh", { "env" = 3000 }))
-  # user_data              = templatefile("../players_userdata.sh", { "env" = 3000 })
   user_data = base64encode(local.user_data3)
+
+  # metadata_options {
+  #   http_put_response_hop_limit = 3
+  #   http_endpoint               = "enabled"
+  # }
 }
 resource "aws_autoscaling_group" "asg_api3" {
 

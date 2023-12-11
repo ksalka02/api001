@@ -1,0 +1,49 @@
+# docker build -t players-api .
+# docker run --name playerapicontainer -p 5000:5000 players-api
+
+# running container locally:
+# docker run -u 0 --name playerapicontainer -p 5000:5000 -v ~/.aws:/root/.aws players-api
+
+# docker exec -it playerapicontainer /bin/sh
+
+
+# find ec2 user id # and match it here
+# find the path to the cred file in ec2 n pass it to docker cont via volumes (-v //://..)
+# pass Ec2InstanceMetadata to docker container as variable
+
+
+
+
+
+
+# TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/iam/security-credentials/playersapi
+
+
+# docker run -it alpine sleep 600
+
+# see how does boto3 fetch metadata info on it's own
+
+
+
+aws_account_id = 939365853055
+
+docker login -u AWS -p $(aws ecr get-login-password --region the-region-you-are-in) xxxxxxxxx.dkr.ecr.the-region-you-are-in.amazonaws.com
+
+authenticate aws ecr login:
+docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) 939365853055.dkr.ecr.us-east-1.amazonaws.com/players-api
+
+
+Tag the image to push to your repository:
+docker tag <docker image>:latest <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com/<ecr_repository>
+docker tag players-api:latest 939365853055.dkr.ecr.us-east-1.amazonaws.com/players-api
+
+
+Push the image:
+docker push <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com/players-api
+docker push 939365853055.dkr.ecr.us-east-1.amazonaws.com/players-api
+
+
+Pull docker image from ecr:
+docker pull <aws_account_id>.dkr.ecr.region.amazonaws.com/<ecr_repository>:latest
+docker pull 939365853055.dkr.ecr.us-east-1.amazonaws.com/players-api:latest
+
