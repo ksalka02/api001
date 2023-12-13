@@ -25,25 +25,27 @@
 
 
 
-aws_account_id = 939365853055
+aws_account_id = XXXXXXXXXXXXXXXXXXX
 
 docker login -u AWS -p $(aws ecr get-login-password --region the-region-you-are-in) xxxxxxxxx.dkr.ecr.the-region-you-are-in.amazonaws.com
 
 authenticate aws ecr login:
-docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) 939365853055.dkr.ecr.us-east-1.amazonaws.com/players-api
+docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) XXXXXXXXXXXXXXXXXXX.dkr.ecr.us-east-1.amazonaws.com/players-api
 
 
 Tag the image to push to your repository:
 docker tag <docker image>:latest <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com/<ecr_repository>
-docker tag players-api:latest 939365853055.dkr.ecr.us-east-1.amazonaws.com/players-api
+docker tag players-api:latest XXXXXXXXXXXXXXXXXXX.dkr.ecr.us-east-1.amazonaws.com/players-api
 
 
 Push the image:
 docker push <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com/players-api
-docker push 939365853055.dkr.ecr.us-east-1.amazonaws.com/players-api
+docker push XXXXXXXXXXXXXXXXXXX.dkr.ecr.us-east-1.amazonaws.com/players-api
 
 
 Pull docker image from ecr:
 docker pull <aws_account_id>.dkr.ecr.region.amazonaws.com/<ecr_repository>:latest
-docker pull 939365853055.dkr.ecr.us-east-1.amazonaws.com/players-api:latest
+docker pull XXXXXXXXXXXXXXXXXXX.dkr.ecr.us-east-1.amazonaws.com/players-api:latest
 
+Delete image:
+aws ecr batch-delete-image --repository-name hello-repository --image-ids imageTag=latest --region region

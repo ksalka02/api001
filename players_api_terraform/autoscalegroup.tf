@@ -1,6 +1,8 @@
 locals {
-  user_data5 = templatefile("../mongo/players_userdata_db.sh", { "env" = 5000 })
-  user_data3 = templatefile("../mongo/players_userdata_db.sh", { "env" = 3000 })
+  # user_data5 = templatefile("../mongo/players_userdata_db.sh", { "env" = 5000 })
+  # user_data3 = templatefile("../mongo/players_userdata_db.sh", { "env" = 3000 })
+  user_data5 = templatefile("../docker_players_api/players_userdata_db_docker.sh", { "port" = 5000 })
+  user_data3 = templatefile("../docker_players_api/players_userdata_db_docker.sh", { "port" = 3000 })
 }
 
 resource "aws_iam_instance_profile" "test_profile" {
