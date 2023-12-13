@@ -48,12 +48,13 @@ docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) 93936585
 echo "###################################  PULL docker image  #############################"
 docker pull 939365853055.dkr.ecr.us-east-1.amazonaws.com/players-api:latest
 
-export PORT="${port}"
+# export PORT="${port}"
 
 echo "###################################  RUN docker  #############################"
 # docker run --name playerapicontainer -p 5000:5000 players-api
 # docker run --name playerapicontainer -p $${ENV}:5000 players-api
-docker run --name playerapicontainer -p 5000:"${port}" players-api
+docker run --name playerapicontainer -p "${port}":5000 players-api
+export PORT="${port}"
 # "$${instance_ip}:8111"
 
 docker ps
