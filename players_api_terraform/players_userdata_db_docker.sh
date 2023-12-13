@@ -53,7 +53,7 @@ export PORT="${port}"
 echo "###################################  RUN docker  #############################"
 # docker run --name playerapicontainer -p 5000:5000 players-api
 # docker run --name playerapicontainer -p $${ENV}:5000 players-api
-docker run --name playerapicontainer -p 5000:$${PORT} players-api
+docker run --name playerapicontainer -p 5000:${port} players-api
 # "$${instance_ip}:8111"
 
 docker ps
