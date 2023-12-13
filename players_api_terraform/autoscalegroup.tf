@@ -24,6 +24,9 @@ resource "aws_launch_template" "players_instance5" {
   #   http_put_response_hop_limit = 3
   #   http_endpoint               = "enabled"
   # }
+  tags = {
+    Name = "players 5"
+  }
 }
 
 
@@ -62,6 +65,9 @@ resource "aws_launch_template" "players_instance3" {
   #   http_put_response_hop_limit = 3
   #   http_endpoint               = "enabled"
   # }
+  tags = {
+    Name = "players 3"
+  }
 }
 resource "aws_autoscaling_group" "asg_api3" {
 
