@@ -3,6 +3,7 @@ from flask_restful import Resource, Api, reqparse
 import pymongo
 from bson import json_util
 import maindb
+import os
 
 connectionString = maindb.connection_string
 client = pymongo.MongoClient(connectionString)
@@ -215,9 +216,9 @@ class moreinfo(Resource):
 api.add_resource(players, '/players')
 api.add_resource(moreinfo, '/moreinfo')
 
-# port = os.environ["ENV"]¸
+port = os.environ["PORT"]
 
 
 if __name__ == "__main__":
-    # app.run(host='0.0.0.0', debug=True, port=port)
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=port)
+    # app.run(host='0.0.0.0', debug=True, port=5000)

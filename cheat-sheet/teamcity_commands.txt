@@ -1,0 +1,8 @@
+# ######################################################### PARTING VOLUME ####################################
+# unmount and make gpt partition table instead of loop
+# umount /dev/xvdf
+# parted /dev/xvdf
+# mktable gpt
+# mkpart xfs 0mb 8590mb
+# print
+# ######################################################### PARTING VOLUME ####################################

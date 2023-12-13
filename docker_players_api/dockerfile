@@ -20,30 +20,11 @@ RUN chown -R 1000:1000 /code
 
 USER $USERNAME
 
-CMD ["python3", "./players.py", "--host", "0.0.0.0", "--port", "5000"]
+CMD ["python3", "./players.py"]
+# CMD ["python3", "./players.py", "--host", "0.0.0.0", "--port", "5000"]
+# CMD ["python3", "./players.py", "--host", "0.0.0.0", "--port", "5000", "3000"]
 
 # CMD ["sleep", "6000"]
-# docker build -t players-api .
-# docker run --name playerapicontainer -p 5000:5000 players-api
-
-# running container locally:
-# docker run -u 0 --name playerapicontainer -p 5000:5000 -v ~/.aws:/root/.aws players-api
-
-# docker exec -it playerapicontainer /bin/sh
 
 
-# find ec2 user id # and match it here
-# find the path to the cred file in ec2 n pass it to docker cont via volumes (-v //://..)
-# pass Ec2InstanceMetadata to docker container as variable
-
-
-
-
-
-
-# TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/iam/security-credentials/playersapi
-
-
-# docker run -it alpine sleep 600
-
-# see how does boto3 fetch metadata info on it's own
+# How does docker work with no credential issues on ec2?? locally it needs the .aws file.
