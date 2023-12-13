@@ -40,7 +40,8 @@ resource "aws_autoscaling_group" "asg_api5" {
   health_check_grace_period = 300
 
   launch_template {
-    id = aws_launch_template.players_instance5.id
+    id      = aws_launch_template.players_instance5.id
+    version = "$Latest"
   }
 }
 
@@ -79,7 +80,8 @@ resource "aws_autoscaling_group" "asg_api3" {
   health_check_grace_period = 300
 
   launch_template {
-    id = aws_launch_template.players_instance3.id
+    id      = aws_launch_template.players_instance3.id
+    version = "$Latest"
   }
 }
 
